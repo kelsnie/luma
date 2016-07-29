@@ -1,0 +1,334 @@
+<head>
+    <title>Luma</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script id="twitter-wjs" src="http://platform.twitter.com/widgets.js"></script>
+    <script type="text/javascript" src="http://andykamath.com/js/WOW.js"></script>
+    <script type="text/javascript">
+    new WOW().init();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/animatecss/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <style type="text/css">
+    .element {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    * {
+        font-family: 'Montserrat';
+    }
+    
+    .bokeh {
+        top: 0;
+        position: fixed;
+        z-index: -100;
+        height: 100%;
+    }
+    
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+    }
+    
+    body {
+        background-color: #1A1406;
+        margin: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" class="bokeh"></canvas>
+    <div class="hero" style="background: transparent;height: 100%">
+        <div class="container" style="height: 100%">
+            <div class="element" align="center">
+                <div id="logo" style="height: 200px;width:200px;"></div>
+                <h1 style="color: #FFF" class="title wow fadeInUp" data-wow-delay="1s">LUMA</h1>
+                <hr style="-webkit-animation-delay:1500ms;animation-delay:1500ms;width: 50%" class="animated zoomIn">
+                <h1><span class="fa fa-angle-down animated fadeInDown" style="color: #FFF;-webkit-animation-delay: 1750ms;animation-delay:1750ms"></span></h1>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/vivus/latest/vivus.min.js"></script>
+    <script>
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+            this.toggleClass("active");
+        });
+    });
+    var divs = $('span[id^="content-"]').hide(),
+        i = 0;
+
+    (function cycle() {
+
+        divs.eq(i).fadeIn(400)
+            .delay(1000)
+            .fadeOut(400, cycle);
+
+        i = ++i % divs.length;
+
+    })();
+    new Vivus('logo', {
+        duration: 75,
+        type: 'oneByOne',
+        file: '/logo.svg'
+    }, console.log('swag'));
+    var canvas = document.querySelector('#myCanvas');
+    canvas.setAttribute('width', window.innerWidth);
+    canvas.setAttribute('height', window.innerHeight);
+
+    function rgb(red, green, blue) {
+        return {
+            r: red,
+            g: green,
+            b: blue
+        };
+    }
+
+    function rgba(r, g, b, a) {
+        return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+    }
+
+    function variate(number, variance) {
+        return Math.floor(number + variance - _.random(variance * 2));
+    }
+    var Bokeh = function(x, y, distance, options) {
+        options = options || {};
+        this.x = x;
+        this.y = y;
+        this.distance = distance;
+        this.opacity = options.opacity;
+        this.color = options.color;
+        this.idiosyncracy = Math.random();
+        this.yStep = this.idiosyncracy - .5;
+
+        this.setAttributes();
+    };
+
+    _.extend(Bokeh.prototype, {
+        draw: function(ctx) {
+            var r = this.color.r,
+                g = this.color.g,
+                b = this.color.b;
+            var radgrad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+            var baseOpacity = this.baseOpacity;
+            if (this.distance < 50) { 
+                radgrad.addColorStop(0, rgba(r, g, b, baseOpacity));
+                radgrad.addColorStop(0.88, rgba(r, g, b, baseOpacity));
+                radgrad.addColorStop(0.89, rgba(r, g, b, baseOpacity + 0.01));
+                radgrad.addColorStop(0.95, rgba(r, g, b, baseOpacity + 0.02));
+                radgrad.addColorStop(1, rgba(r, g, b, 0));
+            } else {
+                radgrad.addColorStop(0, rgba(r, g, b, baseOpacity + .05));
+                radgrad.addColorStop(0.8, rgba(r, g, b, baseOpacity));
+                radgrad.addColorStop(1, rgba(r, g, b, 0));
+            }
+            ctx.fillStyle = radgrad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        },
+        setAttributes: function() {
+            var distance = this.distance;
+            var maxDistance = 100;
+            var maxRadius = 100;
+            this.radius = distance / maxDistance * maxRadius;
+            var coef = (maxDistance - distance) / maxDistance;
+            if (distance < 50) {
+                coef = (50 - distance) / 50;
+            }
+            this.speedCoefficient = coef * coef;
+            this.baseOpacity = this.distance > 50 ? this.idiosyncracy < .2 ? .1 : .05 : .16;
+        }
+    });
+
+    var ctx = canvas.getContext('2d');
+    ctx.globalCompositeOperation = 'lighter'
+
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+
+    var canvasManager = (function() {
+        var ctx = canvas.getContext('2d');
+        var stepActions = [];
+
+        var fadeIn = function(alpha) {
+            ctx.globalAlpha = 0;
+            fadeTo(alpha);
+        }
+
+        var fadeTo = function(alpha) {
+            var stepAction = function() {
+                if ((ctx.globalAlpha - alpha) * (ctx.globalAlpha - alpha) < .00001) {
+                    ctx.globalAlpha = alpha;
+                    removeStepAction(stepAction);
+                }
+                ctx.globalAlpha = ctx.globalAlpha + (alpha - ctx.globalAlpha) / 20;
+            };
+            addStepAction(stepAction);
+        }
+
+        var bindSize = function(element) {
+            window.addEventListener('resize', _.debounce(function() {
+                ctx.canvas.width = element.clientWidth;
+                ctx.canvas.height = element.clientHeight;
+                dotManager.makeDots();
+            }, 100));
+        };
+
+        var clear = function() {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        var step = function() {
+            clear();
+            stepActions.forEach(performAction);
+            requestAnimationFrame(step);
+        };
+
+        var addStepAction = function(action) {
+            stepActions.push(action);
+        };
+
+        var removeStepAction = function(action) {
+            var index = stepActions.indexOf(action);
+            if (index !== -1) {
+                setTimeout(function() { 
+                    stepActions.splice(index, 1);
+                }, 0);
+            }
+        };
+
+        var performAction = function(action) {
+            action(ctx);
+        };
+
+        var withinBounds = function(point, wiggleRoom) {
+            var left = 0 - wiggleRoom;
+            var top = 0 - wiggleRoom;
+            var right = canvas.offsetWidth + wiggleRoom;
+            var bottom = canvas.offsetHeight + wiggleRoom;
+            return (left <= point.x && point.x <= right) && (top <= point.y && point.y <= bottom);
+        };
+
+        return {
+            clear: clear,
+            step: step,
+            addStepAction: addStepAction,
+            fadeIn: fadeIn,
+            fadeTo: fadeTo,
+            bindSize: bindSize,
+            withinBounds: withinBounds
+        }
+    }());
+
+
+    var dotManager = (function(canvas, canvasManager) {
+        var dots = [];
+
+        var transform = function(dot) {
+            if (!canvasManager.withinBounds(dot, dot.radius)) {
+                repurpose(dot);
+            }
+            dot.x += .3 * dot.speedCoefficient + .1;
+            dot.y += dot.yStep * dot.speedCoefficient - .05;
+        };
+
+        var repurpose = function(dot) {
+            if (Math.random() < canvas.offsetHeight / (canvas.offsetWidth + canvas.offsetHeight)) {
+                dot.y = _.random(0, canvas.height);
+                dot.x = 0 - dot.radius;
+            } else {
+                dot.x = _.random(0, canvas.width);
+                if (dot.yStep < 0) {
+                    dot.y = canvas.offsetHeight + dot.radius;
+                } else {
+                    dot.y = 0 - dot.radius;
+                }
+            }
+        }
+
+        var animate = function() {
+            canvasManager.addStepAction(function(ctx) {
+                dots.forEach(function(dot) {
+                    transform(dot);
+                    dot.draw(ctx);
+                });
+            });
+            canvasManager.step();
+        };
+        var makeDots = function() {
+            var canvasArea = canvas.offsetWidth * canvas.offsetHeight;
+            var desiredLargeDots = Math.ceil(canvasArea / 20800);
+            var desiredSmallDots = Math.ceil(canvasArea / 15600);
+            var largeDotsCount = 0;
+            var smallDotsCount = 0;
+
+            dots.forEach(function(dot) {
+                dot.radius < 50 ? smallDotsCount++ : largeDotsCount++;
+            });
+
+            var largeDotsToCreate = Math.max.apply(Math, [desiredLargeDots - largeDotsCount, 0]);
+            var smallDotsToCreate = Math.max.apply(Math, [desiredSmallDots - smallDotsCount, 0]);
+
+            for (var i = 0; i < largeDotsToCreate; i++) {
+                dotManager.dots.push(makeSingleDot(false));
+            }
+
+            for (var i = 0; i < smallDotsToCreate; i++) {
+                dotManager.dots.push(makeSingleDot(true));
+            }
+
+            console.log('created ' + largeDotsToCreate + ' large dots');
+            console.log('created ' + smallDotsToCreate + ' small dots');
+        }
+
+        var makeSingleDot = function(isSmallDot) {
+            var x = _.random(0, canvas.width),
+                y = _.random(0, canvas.height);
+            var radius = isSmallDot ? variate(30, 10) : variate(80, 10);
+            var color = rgb(variate(255, 0), variate(255, 0), variate(255, 0));
+            return new Bokeh(x, y, radius, {
+                opacity: .5,
+                color: color
+            });
+        };
+
+        return {
+            dots: dots,
+            animate: animate,
+            makeDots: makeDots
+        };
+    }(canvas, canvasManager));
+
+    dotManager.makeDots();
+    canvasManager.fadeIn(1);
+    canvasManager.bindSize(document.body);
+    dotManager.animate();
+    </script>
+</body>
