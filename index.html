@@ -20,9 +20,14 @@
     <meta name="mobile-web-app-capable" content="yes">
     <style type="text/css">
     @keyframes gold {
-        from {color: #FFF;}
-        to {color: #FFD700;}
+        from {
+            color: #FFF;
+        }
+        to {
+            color: #FFD700;
+        }
     }
+    
     .element {
         position: relative;
         top: 50%;
@@ -54,11 +59,35 @@
     .padding {
         padding: 50px
     }
+    
+    .container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    
+    .quote {
+        background: #41ade5;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .quote:after {
+        background: inherit;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 50%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        z-index: -1;
+    }
     </style>
 </head>
 
 <body>
-    <div id="hero" class="wow fadeIn" style="background: #003973; /* fallback for old browsers */background: -webkit-linear-gradient(to left, #003973 , #E5E5BE); /* Chrome 10-25, Safari 5.1-6 */background: linear-gradient(to left, #003973 , #E5E5BE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;height: 100%" align="right">
+    <div id="hero" class="wow fadeIn" style="background: #8800CC; /* fallback for old browsers */background: -webkit-linear-gradient(to left, #8800CC , #FFE066); /* Chrome 10-25, Safari 5.1-6 */background: linear-gradient(to left, #8800CC , #FFE066); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;height: 100%" align="right">
         <div class="element">
             <div style="padding-right: 15%;width:50%;position:relative;float:right" class="container wow fadeInUp" data-wow-delay="500ms">
                 <h1 style="color: #FFF"><i class="fa fa-lightbulb-o" style="animation-name: gold;-webkit-transition-duration: 3s;animation-delay: 1500ms;-webkit-animation-delay: 1500ms;transition-duration: 3s;animation-fill-mode: forwards;"></i> LUMA</h1>
@@ -68,20 +97,151 @@
     </div>
     <div class="row">
         <div class="col s3 nav">
-            <div class="element animated fadeInUp" style="-webkit-animation-delay: 0ms;animation-delay:0s" align="center">HOME</div>
+            <div class="element animated fadeInUp" style="-webkit-animation-delay: 0ms;animation-delay:0s" align="center"><a href="#">HOME</a></div>
         </div>
         <div class="col s3 nav">
-            <div class="element animated fadeInUp" style="-webkit-animation-delay: 250ms;animation-delay:250ms" align="center">ABOUT</div>
+            <div class="element animated fadeInUp" style="-webkit-animation-delay: 250ms;animation-delay:250ms" align="center"><a href="#about">ABOUT</a></div>
         </div>
         <div class="col s3 nav">
-            <div class="element animated fadeInUp" style="-webkit-animation-delay: 500ms;animation-delay:500ms" align="center">TEAM</div>
+            <div class="element animated fadeInUp" style="-webkit-animation-delay: 500ms;animation-delay:500ms" align="center"><a href="#team">TEAM</a></div>
         </div>
         <div class="col s3 nav">
-            <div class="element animated fadeInUp" style="-webkit-animation-delay: 750ms;animation-delay:750ms" align="center">CONTACT</div>
+            <div class="element animated fadeInUp" style="-webkit-animation-delay: 750ms;animation-delay:750ms" align="center"><a href="#contact">CONTACT</a></div>
         </div>
     </div>
-    <div style="height: 500%"></div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/vivus/latest/vivus.min.js"></script>
+    <div id="about" style="height: 100%" class="quote">
+        <div class="element">
+            <div class="container" align="center">
+                <h1 class="wow fadeInUp">About <span class="wow fadeInUp" data-wow-delay="250ms">LUMA</span></h1>
+                <hr style="width:25%;border: 2px solid #FFE066;margin-top:10px" class="wow zoomIn" data-wow-delay="500ms">
+                <h5 class="wow fadeInUp" data-wow-delay="750ms">LUMA (LUMA-naries United against Mass Attacks) is a global open-source initiative dedicated to fighting terrorism. </h5>
+                <br>
+                <h5><a href="#team" class="wow fadeInUp" data-wow-delay="1s" style="color: #FFF">See our awesome team <span class="fa fa-angle-right"></span></a></h5>
+            </div>
+        </div>
+    </div>
+    <div id="team">
+        <div class="container" align="center">
+            <h1 class="wow fadeInUp">The <span class="wow fadeInUp" data-wow-delay="250ms">TEAM</span></h1>
+            <hr style="width:25%;border: 2px solid #8800CC;margin-top:10px" class="wow zoomIn" data-wow-delay="500ms">
+            <br>
+            <div class="row wow fadeInUp" data-wow-delay="750ms">
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://avatars3.githubusercontent.com/u/9733727?v=3&s=460">
+                            <span class="card-title">Jay</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Senior at Fordham Preparatory
+                                <br>
+                                <br>New York</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://github.com/jayshenoy">Github</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/c24.0.160.160/p160x160/13418817_10207654082724754_6040640826370867748_n.jpg?oh=29f8d56ea03c89aafbae7706e46a5ff0&oe=582D4393">
+                            <span class="card-title">Kelsey</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Student at Boston University
+                                <br>
+                                <br>Boston</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://github.com/jayshenoy">Github</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-9/12573730_10208126685315307_2424904624460709880_n.jpg?oh=712eaa27a50672fb315e523f5bc75e82&oe=5829055D" class="img-responsive">
+                            <span class="card-title">Michelle</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Student at New York University
+                                <br>
+                                <br>New York</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://github.com/jayshenoy">Github</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://pbs.twimg.com/profile_images/759366924237021184/_yI_AEj-.jpg" class="img-responsive">
+                            <span class="card-title">Andy</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Senior at Providence High
+                                <br>
+                                <br>Charlotte</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://github.com/andykamath">Github</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-9/13091980_569006699944503_7323855232739218008_n.jpg?oh=a43881ecd897588bb56d7082045f321f&oe=58169608" class="img-responsive">
+                            <span class="card-title">Rufus</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Senior at Fordham Preparatory
+                                <br>
+                                <br>New York</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://github.com/jayshenoy">Github</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/1002475_10151742657384557_1784449634_n.jpg?oh=01708f20d4d1207eb39d72b44c954d42&oe=5820E9DB" class="img-responsive">
+                            <span class="card-title">Matt</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Senior at Columbia University
+                                <br>
+                                <br>New York</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="http://github.com/jayshenoy">Github</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact" style="color: #FFF;background: #777" align="center">
+        <div class="container">
+        <form action="https://formspree.io/akamath426@gmail.com" method="POST">
+            <center><h1>CONTACT US</h1></center>
+            <input type="text" name="name" style="width: 75%" placeholder="Name">
+            <br>
+            <br>
+            <input type="email" name="_replyto" style="width: 75%" placeholder="Your Email Address">
+            <br>
+            <br>
+            <textarea style="width: 75%" rows="4" placeholder="What you want to say" style="border: none" name="body"></textarea>
+            <br>
+            <br>
+            <center><input type="submit" value="Send" class="btn btn-primary"></center>
+        </form>
+        </div>
+    </div>
     <script>
     $(function() {
         $('a[href*=#]:not([href=#])').click(function() {
@@ -101,10 +261,14 @@
     });
     $(".row").hide();
     $(document).ready(function() {
-        setTimeout(function(){$(".row").show()
-                width = $(window).height()-$(window).width()*.0625
-                $("#hero").animate({height: width}, 500)
-                $(".nav").css('height', $(window).width()*.0625)}, 1500)
-    })
+        setTimeout(function() {
+            $(".row").show()
+            width = $(window).height() - $(window).width() * .0625
+            $("#hero").animate({
+                height: width
+            }, 500)
+            $(".nav").css('height', $(window).width() * .0625)
+        }, 1500)
+    });
     </script>
 </body>
